@@ -4,10 +4,10 @@ import MatchList from "../components/MatchList";
 import axios from "axios";
 import { TextField, Button, Typography, Container, Grid, Divider } from "@mui/material";
 
-const socket = io("http://localhost:3000"); // 连接 WebSocket 服务器 with backend address
+const socket = io("http://localhost:3000"); // Connect to the WebSocket server with backend address
 
 function Matches() {
-  //--------------const 区域---------------
+  //--------------const area---------------
   // For Find Buddy
   const [location, setLocation] = useState("");
   const [interests, setInterests] = useState("");
@@ -15,13 +15,13 @@ function Matches() {
   const [error, setError] = useState("");
 
   // For WebSocket Chat
-  const [chatUser,setChatUser]=useState(null);
+  const [chatUser, setChatUser] = useState(null);
   const [room, setRoom] = useState("");
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
 
   //====API: WebSocket==========================================================
-  // 监听消息
+  // Listen for messages
   useEffect(() => {
     socket.on("receiveMessage", (data) => {
       setChat((prevChat) => [...prevChat, data]);
@@ -32,7 +32,7 @@ function Matches() {
     };
   }, []);
 
-  // 加入房间
+  // Join a room
   const handleJoinRoom = () => {
     if (room) {
       socket.emit("joinRoom", room);
@@ -40,10 +40,10 @@ function Matches() {
     }
   };
 
-  // 发送消息
+  // Send a message
   const handleSendMessage = () => {
     if (room && message) {
-      const sender = "User1"; // 示例发送者
+      const sender = "User1"; // Example sender
       socket.emit("sendMessage", { room, message, sender });
       setMessage("");
     }
@@ -82,7 +82,7 @@ function Matches() {
         Find Your Travel Buddies
       </Typography>
 
-      {/* 表单 */}
+      {/* Form */}
       <Grid container spacing={2} style={{ marginBottom: "20px" }}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -108,26 +108,26 @@ function Matches() {
         Find Matches
       </Button>
 
-      {/* 错误信息 */}
+      {/* Error Message */}
       {error && (
         <Typography variant="body1" color="error" style={{ marginTop: "20px" }}>
           {error}
         </Typography>
       )}
 
-      {/* 匹配结果 */}
+      {/* Match Results */}
       <div style={{ marginTop: "20px" }}>
         <MatchList matches={matches} />
       </div>
 
-      {/* 分隔线 */}
+      {/* Divider */}
       <Divider style={{ margin: "40px 0" }} />
 
       <Typography variant="h4" color="primary" gutterBottom>
         Real-Time Chat
       </Typography>
 
-      {/* 加入房间 */}
+      {/* Join Room */}
       <Grid container spacing={2} style={{ marginBottom: "20px" }}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -145,7 +145,7 @@ function Matches() {
         </Grid>
       </Grid>
 
-      {/* 消息输入 */}
+      {/* Message Input */}
       <TextField
         label="Message"
         variant="outlined"
@@ -158,7 +158,7 @@ function Matches() {
         Send Message
       </Button>
 
-      {/* 聊天记录 */}
+      {/* Chat Records */}
       <div style={{ marginTop: "20px", maxHeight: "300px", overflowY: "auto" }}>
         {chat.map((c, index) => (
           <Typography key={index} variant="body1" style={{ marginBottom: "10px" }}>

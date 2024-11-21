@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 function MatchList({ matches }) {
 
-  const navigate = useNavigate(); // Hook，用于页面跳转
+  const navigate = useNavigate(); // Hook for page jumps
 
   const handleChat = (id) => {
-    navigate(`/chat/${id}`); // 跳转到聊天页面
+    navigate(`/chat/${id}`); // jump to chat page
   };
 
   if (!matches) {

@@ -1,70 +1,153 @@
-# Getting Started with Create React App
+# Traveller Buddy - A MERN Stack Travel Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
 
-## Available Scripts
+Traveller Buddy is a powerful travel companion application designed to enhance solo and group travel experiences. The platform provides two core functionalities: Buddy Matching and Real-Time Chat for connecting travelers and AI-Powered Itinerary Planning and Editing for creating personalized travel plans. Built with the MERN stack, Redis caching, and WebSocket support, Traveller Buddy demonstrates scalability, high performance, and modern web application architecture.
 
-In the project directory, you can run:
+## Core Features
 
-### `npm start`
+### 1. Social Matching & Real-Time Chat
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Connect with like-minded travelers based on shared interests and preferences. The platform helps users find suitable travel companions and engage in seamless conversations.
+	•	User Registration & Authentication:
+	•	Secure user authentication using JWT.
+	•	Users create profiles with interests, preferred destinations, and travel styles.
+	•	Buddy Matching:
+	•	Advanced matching algorithm recommends compatible users based on preferences and location.
+	•	Provides a curated list of potential travel companions with a one-click option to initiate a chat.
+	•	Real-Time Chat:
+	•	Built with WebSocket for instant messaging.
+	•	Chat history is stored in the database, allowing users to continue conversations even after logging out.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. AI-Powered Itinerary Planning & Editing
 
-### `npm test`
+Create and manage custom travel plans effortlessly using AI-generated itineraries. Tailor activities to suit your preferences and budget.
+	•	AI-Generated Itineraries:
+	•	Input travel destination, days, and budget.
+	•	AI generates a daily plan with activities, accommodations, and transport suggestions.
+	•	Editable Itineraries:
+	•	Users can add, edit, or delete activities directly from their travel plans.
+	•	Plans are saved and accessible for future updates.
+	•	Future Scope:
+	•	Collaborative editing: Invite friends to suggest or modify plans.
+	•	Sharing: Generate unique links to share itineraries with others.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack
 
-### `npm run build`
+Category	Technology
+Frontend	React, React Router
+Backend	Node.js, Express.js
+Database	MongoDB, Redis
+Real-Time	WebSocket (Socket.IO)
+AI Integration	OpenAI GPT-3.5 Turbo
+Authentication	JWT (JSON Web Tokens)
+Deployment	Heroku, GitHub
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Architecture Overview
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+	1.	Frontend:
+	•	Built with React for modular, dynamic user experiences.
+	•	Components handle buddy matching, chat, and itinerary editing.
+	2.	Backend:
+	•	Node.js and Express.js power secure and efficient API routes.
+	•	Redis caching accelerates responses for itinerary generation.
+	3.	Database:
+	•	MongoDB stores user data, itineraries, and chat history.
+	4.	Real-Time Communication:
+	•	WebSocket enables low-latency chat and real-time updates.
+	5.	AI Integration:
+	•	OpenAI’s GPT-3.5 Turbo API generates personalized travel plans.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Setup Instructions
 
-### `npm run eject`
+## Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+	•	Node.js v16 or higher.
+	•	MongoDB (local or Atlas).
+	•	Redis (local or cloud-hosted).
+	•	OpenAI API Key.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Steps to Run Locally
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+	1.	Clone the repository:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+git clone https://github.com/your-username/traveller-buddy.git
+cd traveller-buddy
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+	2.	Install dependencies:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+npm install
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+	3.	Set up environment variables:
+	•	Create a .env file in the root directory with the following:
 
-### Analyzing the Bundle Size
+PORT=3000
+MONGO_URI=your_mongodb_uri
+REDIS_URI=your_redis_uri
+OPENAI_API_KEY=your_openai_api_key
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+	4.	Start the backend server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+node server.js
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+	5.	Navigate to frontend/ (if separate frontend project):
 
-### Deployment
+cd frontend
+npm install
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+## Buddy Matching
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+	•	Endpoint: POST /api/match
+	•	Description: Returns a list of matching buddies based on user preferences.
+	•	Request Body:
+
+{
+    "location": "New York",
+    "interests": ["hiking", "museums"]
+}
+
+
+	•	Response:
+
+[
+    {
+        "username": "JohnDoe",
+        "location": "New York",
+        "interests": ["hiking", "art"]
+    }
+]
+
+
+
+## Itinerary Generation
+
+	•	Endpoint: POST /api/itinerary/generate
+	•	Description: AI-powered itinerary generation based on user input.
+	•	Request Body:
+
+{
+    "destination": "New York",
+    "days": 3,
+    "budget": 1000
+}
+
+
+	•	Response:
+
+{
+    "destination": "New York",
+    "days": 3,
+    "budget": 1000,
+    "activities": [
+        { "day": 1, "activity": "Visit Central Park", "cost": 50 },
+        { "day": 1, "activity": "Dinner at Times Square", "cost": 40 }
+    ]
+}
+
+

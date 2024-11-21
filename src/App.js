@@ -7,51 +7,48 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Chat from "./pages/Chat";
 import ItineraryPage from "./pages/ItineraryPage";
 
-
-//Adding MUI Theme
+// Adding MUI Theme
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#1976d2", // 蓝色
+      main: "#1976d2", // Blue
     },
     secondary: {
-      main: "#ff4081", // 粉色
+      main: "#ff4081", // Pink
     },
   },
 });
 
-
 function App() {
 
 // Adding: test part
-// const [testMessage, setTestMessage] = useState(""); // 存储后端的消息
+// const [testMessage, setTestMessage] = useState(""); // Store messages from the backend
 
-//   // 新加：API 调用逻辑
+//   // Adding: API call logic
 //   useEffect(() => {
-//     fetch("/api/test") // 调用后端 /api/test
-//       .then((response) => response.json()) // 将返回的数据解析为 JSON
-//       .then((data) => setTestMessage(data.message)) // 保存后端返回的 message 到状态中
+//     fetch("/api/test") // Call backend /api/test
+//       .then((response) => response.json()) // Parse the response to JSON
+//       .then((data) => setTestMessage(data.message)) // Save the returned message to the state
 //       .catch((error) => console.error("Error fetching API:", error));
 //   }, []);
 
   //
 
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>
-    <Router>
-      <div>
-        {/* <h1>Frontend to Backend Connection Test</h1> */}
-        {/* <p>{testMessage ? testMessage : "Loading..."}</p> */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/matches" element={<Matches />} />
-          <Route path="/chat/:id" element={<Chat />} /> {/* 添加聊天页面路由 */}
-          <Route path="/itinerary" element={<ItineraryPage />} /> {/* 添加聊天页面路由 */}
-        </Routes>
-      </div>
-    </Router>
+      <Router>
+        <div>
+          {/* <h1>Frontend to Backend Connection Test</h1> */}
+          {/* <p>{testMessage ? testMessage : "Loading..."}</p> */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/matches" element={<Matches />} />
+            <Route path="/chat/:id" element={<Chat />} /> {/* Add chat page route */}
+            <Route path="/itinerary" element={<ItineraryPage />} /> {/* Add itinerary page route */}
+          </Routes>
+        </div>
+      </Router>
     </ThemeProvider>
   );
 }

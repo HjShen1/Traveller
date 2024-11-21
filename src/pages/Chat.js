@@ -4,37 +4,37 @@ import { Typography, Container, List, ListItem, ListItemText, TextField, Button 
 import io from "socket.io-client";
 import axios from "axios";
 
-const socket = io("http://localhost:3000"); // 连接到后端 WebSocket
+const socket = io("http://localhost:3000"); // link to backend WebSocket
 
 function Chat() {
-    const { id } = useParams(); // 从 URL 中获取房间 ID
-    const [messages, setMessages] = useState([]); // 聊天记录
-    const [newMessage, setNewMessage] = useState(""); // 新消息内容
-    const [sender, setSender] = useState("User1"); // 模拟当前用户（可以替换为登录用户）
+    const { id } = useParams(); // get room ID from URL
+    const [messages, setMessages] = useState([]); // chat records
+    const [newMessage, setNewMessage] = useState(""); // new message
+    const [sender, setSender] = useState("User1"); // Simulating current user (can be replaced with logged-in user)
 
-    // 加入房间并加载聊天记录
+    // Join room and load chat history
     useEffect(() => {
-        // 加入房间
+        // Join the room
         socket.emit("joinRoom", id);
 
-        // 加载聊天记录
+        // Load chat history
         axios
             .get(`/api/chat/${id}`)
             .then((response) => setMessages(response.data))
             .catch((error) => console.error("Failed to load chat history:", error));
 
-        // 接收实时消息
+        // Receive real-time messages
         socket.on("receiveMessage", (message) => {
             setMessages((prevMessages) => [...prevMessages, message]);
         });
 
-        // 清理 WebSocket 连接
+        // Clean up WebSocket connection
         return () => {
             socket.disconnect();
         };
     }, [id]);
 
-    // 发送消息
+    // Send message
     const sendMessage = () => {
         if (newMessage.trim() === "") return;
 
@@ -44,10 +44,10 @@ function Chat() {
             message: newMessage,
         };
 
-        // 通过 WebSocket 发送消息
-        console.log("Sending message:", messageData); // 确认发送内容
+        // Send message via WebSocket
+        console.log("Sending message:", messageData); // Confirm the content being sent
         socket.emit("message", messageData);
-        setNewMessage(""); // 清空输入框
+        setNewMessage(""); // Clear input field
     };
 
     return (
@@ -55,7 +55,7 @@ function Chat() {
             <Typography variant="h4" color="primary" gutterBottom>
                 Chat with User {id}
             </Typography>
-            {/* 聊天记录 */}
+            {/* Chat records */}
             <List>
                 {messages.map((msg, index) => (
                     <ListItem key={index}>
@@ -66,7 +66,7 @@ function Chat() {
                     </ListItem>
                 ))}
             </List>
-            {/* 输入框和发送按钮 */}
+            {/* Input field and send button */}
             <TextField
                 fullWidth
                 value={newMessage}
